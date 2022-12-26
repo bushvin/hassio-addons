@@ -1,6 +1,6 @@
 ---
 name: Restic Backups
-version: 0.0.6
+version: 0.0.7
 slug: restic
 description: Simple backups using restic
 arch:
@@ -28,50 +28,8 @@ options:
   restic_password: ''
   restic_hostname: hassio
   restic_envvar: {}
-  addons:
-    enable_backup: true
-    tags:
-      - addons
-    exclude: []
-    enable_forget: true
-    keep_daily: 24
-    keep_weekly: 5
-    keep_monthly: 12
-    keep_yearly: 100
-  backup:
-    enable_backup: true
-    tags:
-      - backup
-    exclude: []
-    enable_forget: true
-    keep_daily: 24
-    keep_weekly: 5
-    keep_monthly: 12
-    keep_yearly: 100
-  config:
-    enable_backup: true
-    tags:
-      - config
-    exclude: []
-    enable_forget: true
-    keep_daily: 24
-    keep_weekly: 5
-    keep_monthly: 12
-    keep_yearly: 100
-  media:
-    enable_backup: true
-    tags:
-      - media
-    exclude: []
-    enable_forget: true
-    keep_daily: 24
-    keep_weekly: 5
-    keep_monthly: 12
-    keep_yearly: 100
-  share:
-    enable_backup: false
-    tags:
-      - share
-    exclude: []
-schema: false
+schema:
+  restic_repository: str
+  restic_password: password
+  restic_hostname: str
 
