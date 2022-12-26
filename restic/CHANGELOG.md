@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+- bugfix: /share should be r/w
+
 ## 1.1.0
 
 - (re)introduction of `pre_commands` and `post_commands`
