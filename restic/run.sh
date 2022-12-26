@@ -14,6 +14,12 @@ export RESTIC_PASSWORD=$(bashio::config restic_password)
 export RESTIC_CACHE_DIR=/data/restic-cache
 export TMPDIR=/tmp
 restic_hostname=$(bashio::config restic_hostname hassio)
+restic_cacert=$(bashio::config restic_cacert)
+if test "${restic_cacert}" != "" -a -f "${restic_cacert}"; then
+    restic_cacert="--cacert=${restic_cacert}"
+else
+    restic_cacert=""
+fi
 
 for b in addons backup config media share ssl; do
     enable_backup=$(bashio::config ${b}.enable_backup)
@@ -25,6 +31,7 @@ $(jq -r ".${b}.exclude|to_entries[]|(.value|tostring)" $OPTIONS)
 EOF
       set -x
       restic backup --verbose \
+          $restic_cacert \
           --host=$restic_hostname \
           $restic_tags \
           --cleanup-cache \
@@ -39,6 +46,7 @@ EOF
           keep_yearly=$(bashio::config ${b}.keep_yearly 0)
           set -x
           restic forget --verbose \
+              $restic_cacert \
               --host=$restic_hostname \
               $restic_tags \
               --keep-daily $keep_daily \
@@ -48,6 +56,8 @@ EOF
               --prune
           set +x
       fi
+    else
+        echo "Skipping backup of /$b"
     fi
 done
 
