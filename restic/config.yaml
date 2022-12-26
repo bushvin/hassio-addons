@@ -1,8 +1,8 @@
 ---
 name: Restic Backups
-version: 0.0.11
+version: 0.0.12
 slug: restic
-description: Simple backups using restic
+description: Backups done right!
 arch:
   - aarch64
   - amd64
@@ -27,7 +27,47 @@ options:
   restic_repository: /share/restic
   restic_password: ''
   restic_hostname: hassio
-  restic_envvar: {}
+  restic_envvar:
+    AWS_ACCESS_KEY_ID: ""
+    AWS_DEFAULT_REGION: ""
+    AWS_PROFILE: ""
+    AWS_SECRET_ACCESS_KEY: ""
+    AWS_SESSION_TOKEN: ""
+    AWS_SHARED_CREDENTIALS_FILE: ""
+    AZURE_ACCOUNT_KEY: ""
+    AZURE_ACCOUNT_NAME: ""
+    AZURE_ACCOUNT_SAS: ""
+    B2_ACCOUNT_ID: ""
+    B2_ACCOUNT_KEY: ""
+    GOOGLE_APPLICATION_CREDENTIALS: ""
+    GOOGLE_PROJECT_ID: ""
+    OS_APPLICATION_CREDENTIAL_ID: ""
+    OS_APPLICATION_CREDENTIAL_NAME: ""
+    OS_APPLICATION_CREDENTIAL_SECRET: ""
+    OS_AUTH_TOKEN: ""
+    OS_AUTH_URL: ""
+    OS_PASSWORD: ""
+    OS_PROJECT_DOMAIN_ID: ""
+    OS_PROJECT_DOMAIN_NAME: ""
+    OS_PROJECT_NAME: ""
+    OS_REGION_NAME: ""
+    OS_STORAGE_URL: ""
+    OS_TENANT_ID: ""
+    OS_TENANT_NAME: ""
+    OS_TRUST_ID: ""
+    OS_USER_DOMAIN_ID: ""
+    OS_USER_DOMAIN_NAME: ""
+    OS_USER_ID: ""
+    OS_USERNAME: ""
+    RCLONE_BWLIMIT: ""
+    RESTIC_COMPRESSION: ""
+    RESTIC_KEY_HINT: ""
+    RESTIC_PACK_SIZE: ""
+    RESTIC_PASSWORD_COMMAND: ""
+    RESTIC_PROGRESS_FPS: ""
+    ST_AUTH: ""
+    ST_KEY: ""
+    ST_USER: ""
   addons:
     enable_backup: false
     tags:
@@ -81,7 +121,7 @@ options:
   ssl:
     enable_backup: false
     tags:
-      - ssl 
+      - ssl
     exclude: []
     enable_forget: true
     keep_daily: 24
@@ -92,6 +132,47 @@ schema:
   restic_repository: str
   restic_password: password
   restic_hostname: str
+  restic_envvar:
+    AWS_ACCESS_KEY_ID: str
+    AWS_DEFAULT_REGION: str
+    AWS_PROFILE: str
+    AWS_SECRET_ACCESS_KEY: password
+    AWS_SESSION_TOKEN: str
+    AWS_SHARED_CREDENTIALS_FILE: str
+    AZURE_ACCOUNT_KEY: password
+    AZURE_ACCOUNT_NAME: str
+    AZURE_ACCOUNT_SAS: str
+    B2_ACCOUNT_ID: str
+    B2_ACCOUNT_KEY: password
+    GOOGLE_APPLICATION_CREDENTIALS: str
+    GOOGLE_PROJECT_ID: str
+    OS_APPLICATION_CREDENTIAL_ID: str
+    OS_APPLICATION_CREDENTIAL_NAME: str
+    OS_APPLICATION_CREDENTIAL_SECRET: password
+    OS_AUTH_TOKEN: password
+    OS_AUTH_URL: str
+    OS_PASSWORD: password
+    OS_PROJECT_DOMAIN_ID: str
+    OS_PROJECT_DOMAIN_NAME: str
+    OS_PROJECT_NAME: str
+    OS_REGION_NAME: str
+    OS_STORAGE_URL: str
+    OS_TENANT_ID: str
+    OS_TENANT_NAME: str
+    OS_TRUST_ID: str
+    OS_USER_DOMAIN_ID: str
+    OS_USER_DOMAIN_NAME: str
+    OS_USER_ID: str
+    OS_USERNAME: str
+    RCLONE_BWLIMIT: str
+    RESTIC_COMPRESSION: str
+    RESTIC_KEY_HINT: str
+    RESTIC_PACK_SIZE: str
+    RESTIC_PASSWORD_COMMAND: str
+    RESTIC_PROGRESS_FPS: str
+    ST_AUTH: str
+    ST_KEY: str
+    ST_USER: str
   addons:
     enable_backup: bool
     tags:
