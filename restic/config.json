@@ -1,0 +1,174 @@
+{
+    "version": "1.0.0",
+    "slug": "restic",
+    "name": "Restic Backups",
+    "description": "Simple backups using restic",
+    "homeassistant": "2022.12.8",
+    "init": false,
+    "arch": [
+        "aarch64",
+        "amd64",
+        "armhf",
+        "armv7",
+        "i386"
+    ],
+    "map": [
+        "addons:ro",
+        "backup:ro",
+        "config:ro",
+        "media:ro",
+        "share:rw",
+        "ssl:ro"
+    ],
+    "privileged": [
+        "DAC_READ_SEARCH"
+    ],
+    "tmpfs": true,
+    "panel_icon": "mdi:backup-restore",
+    "panel_title": "Restic Backups",
+    "panel_admin": true,
+    "options": {
+        "restic_repository": "/share/restic",
+        "restic_password": "",
+        "restic_hostname": "hassio",
+        "restic_envvar": {},
+        "addons": {
+            "enable_backup": true,
+            "tags": [
+                "addons"
+            ],
+            "exclude": [],
+            "enable_forget": true,
+            "keep_daily": 24,
+            "keep_weekly": 5,
+            "keep_monthly": 12,
+            "keep_yearly": 100
+        },
+        "backup": {
+            "enable_backup": true,
+            "tags": [
+                "backup"
+            ],
+            "exclude": [],
+            "enable_forget": true,
+            "keep_daily": 24,
+            "keep_weekly": 5,
+            "keep_monthly": 12,
+            "keep_yearly": 100
+        },
+        "config": {
+            "enable_backup": true,
+            "tags": [
+                "config"
+            ],
+            "exclude": [],
+            "enable_forget": true,
+            "keep_daily": 24,
+            "keep_weekly": 5,
+            "keep_monthly": 12,
+            "keep_yearly": 100
+        },
+        "media": {
+            "enable_backup": true,
+            "tags": [
+                "media"
+            ],
+            "exclude": [],
+            "enable_forget": true,
+            "keep_daily": 24,
+            "keep_weekly": 5,
+            "keep_monthly": 12,
+            "keep_yearly": 100
+        },
+        "share": {
+            "enable_backup": false,
+            "tags": [
+                "share"
+            ],
+            "exclude": [],
+            "enable_forget": true,
+            "keep_daily": 24,
+            "keep_weekly": 5,
+            "keep_monthly": 12,
+            "keep_yearly": 100
+        },
+        "ssl": {
+            "enable_backup": true,
+            "tags": [
+                "ssl"
+            ],
+            "exclude": [],
+            "enable_forget": true,
+            "keep_daily": 24,
+            "keep_weekly": 5,
+            "keep_monthly": 12,
+            "keep_yearly": 100
+        }
+    },
+    "schema": {
+        "restic_repository": "str",
+        "restic_password": "password",
+        "restic_hostname": "str",
+        "restic_envvar": {},
+        "addons": {
+            "enable_backup": "bool",
+            "tags": "list",
+            "exclude": "list",
+            "enable_forget": "bool",
+            "keep_daily": "int(0,31)",
+            "keep_weekly": "int(0,52)",
+            "keep_monthly": "int(0,12)",
+            "keep_yearly": "int(0,200)"
+        },
+        "backup": {
+            "enable_backup": "bool",
+            "tags": "list",
+            "exclude": "list",
+            "enable_forget": "bool",
+            "keep_daily": "int(0,31)",
+            "keep_weekly": "int(0,52)",
+            "keep_monthly": "int(0,12)",
+            "keep_yearly": "int(0,200)"
+        },
+        "config": {
+            "enable_backup": "bool",
+            "tags": "list",
+            "exclude": "list",
+            "enable_forget": "bool",
+            "keep_daily": "int(0,31)",
+            "keep_weekly": "int(0,52)",
+            "keep_monthly": "int(0,12)",
+            "keep_yearly": "int(0,200)"
+        },
+        "media": {
+            "enable_backup": "bool",
+            "tags": "list",
+            "exclude": "list",
+            "enable_forget": "bool",
+            "keep_daily": "int(0,31)",
+            "keep_weekly": "int(0,52)",
+            "keep_monthly": "int(0,12)",
+            "keep_yearly": "int(0,200)"
+        },
+        "share": {
+            "enable_backup": "bool",
+            "tags": "list",
+            "exclude": "list",
+            "enable_forget": "bool",
+            "keep_daily": "int(0,31)",
+            "keep_weekly": "int(0,52)",
+            "keep_monthly": "int(0,12)",
+            "keep_yearly": "int(0,200)"
+        },
+        "ssl": {
+            "enable_backup": "bool",
+            "tags": "list",
+            "exclude": "list",
+            "enable_forget": "bool",
+            "keep_daily": "int(0,31)",
+            "keep_weekly": "int(0,52)",
+            "keep_monthly": "int(0,12)",
+            "keep_yearly": "int(0,200)"
+        }
+    }
+}
