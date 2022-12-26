@@ -3,7 +3,9 @@ FROM $BUILD_FROM
 
 # Copy data for add-on
 COPY run.sh /
+
 RUN chmod a+x /run.sh
-RUN apk add --no-cache restic
+
+RUN apk add --no-cache restic mysql-client postgresql-client
 
 CMD [ "/run.sh" ]
