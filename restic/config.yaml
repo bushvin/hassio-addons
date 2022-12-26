@@ -1,6 +1,6 @@
 ---
 name: Restic Backups
-version: 0.0.9
+version: 0.0.10
 slug: restic
 description: Simple backups using restic
 arch:
@@ -38,11 +38,116 @@ options:
     keep_weekly: 5
     keep_monthly: 12
     keep_yearly: 100
+  backup:
+    enable_backup: false
+    tags:
+      - backup
+    exclude: []
+    enable_forget: true
+    keep_daily: 24
+    keep_weekly: 5
+    keep_monthly: 12
+    keep_yearly: 100
+  config:
+    enable_backup: false
+    tags:
+      - config
+    exclude: []
+    enable_forget: true
+    keep_daily: 24
+    keep_weekly: 5
+    keep_monthly: 12
+    keep_yearly: 100
+  media:
+    enable_backup: false
+    tags:
+      - media
+    exclude: []
+    enable_forget: true
+    keep_daily: 24
+    keep_weekly: 5
+    keep_monthly: 12
+    keep_yearly: 100
+  share:
+    enable_backup: false
+    tags:
+      - share
+    exclude: []
+    enable_forget: true
+    keep_daily: 24
+    keep_weekly: 5
+    keep_monthly: 12
+    keep_yearly: 100
+  ssl:
+    enable_backup: false
+    tags:
+      - ssl 
+    exclude: []
+    enable_forget: true
+    keep_daily: 24
+    keep_weekly: 5
+    keep_monthly: 12
+    keep_yearly: 100
 schema:
   restic_repository: str
   restic_password: password
   restic_hostname: str
   addons:
+    enable_backup: bool
+    tags:
+      - str
+    exclude:
+      - str
+    enable_forget: bool
+    keep_daily: "int(0,31)"
+    keep_weekly: "int(0,52)"
+    keep_monthly: "int(0,12)"
+    keep_yearly: "int(0,200)"
+  backup:
+    enable_backup: bool
+    tags:
+      - str
+    exclude:
+      - str
+    enable_forget: bool
+    keep_daily: "int(0,31)"
+    keep_weekly: "int(0,52)"
+    keep_monthly: "int(0,12)"
+    keep_yearly: "int(0,200)"
+  config:
+    enable_backup: bool
+    tags:
+      - str
+    exclude:
+      - str
+    enable_forget: bool
+    keep_daily: "int(0,31)"
+    keep_weekly: "int(0,52)"
+    keep_monthly: "int(0,12)"
+    keep_yearly: "int(0,200)"
+  media:
+    enable_backup: bool
+    tags:
+      - str
+    exclude:
+      - str
+    enable_forget: bool
+    keep_daily: "int(0,31)"
+    keep_weekly: "int(0,52)"
+    keep_monthly: "int(0,12)"
+    keep_yearly: "int(0,200)"
+  share:
+    enable_backup: bool
+    tags:
+      - str
+    exclude:
+      - str
+    enable_forget: bool
+    keep_daily: "int(0,31)"
+    keep_weekly: "int(0,52)"
+    keep_monthly: "int(0,12)"
+    keep_yearly: "int(0,200)"
+  ssl:
     enable_backup: bool
     tags:
       - str
