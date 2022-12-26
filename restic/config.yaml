@@ -73,4 +73,54 @@ options:
     tags:
       - share
     exclude: []
+schema:
+  restic_repository: str
+  restic_password: password
+  restic_hostname: str
+  restic_envvar: {}
+  addons:
+    enable_backup: bool
+    tags: list
+    exclude: list
+    enable_forget: bool
+    keep_daily: "int(0,31)"
+    keep_weekly: "int(0,52)"
+    keep_monthly: "int(0,12)"
+    keep_yearly: "int(0,200)"
+  backup:
+    enable_backup: bool
+    tags: list
+    exclude: list
+    enable_forget: bool
+    keep_daily: "int(0,31)"
+    keep_weekly: "int(0,52)"
+    keep_monthly: "int(0,12)"
+    keep_yearly: "int(0,200)"
+  config:
+    enable_backup: bool
+    tags: list
+    exclude: list
+    enable_forget: bool
+    keep_daily: "int(0,31)"
+    keep_weekly: "int(0,52)"
+    keep_monthly: "int(0,12)"
+    keep_yearly: "int(0,200)"
+  media:
+    enable_backup: bool
+    tags: list
+    exclude: list
+    enable_forget: bool
+    keep_daily: "int(0,31)"
+    keep_weekly: "int(0,52)"
+    keep_monthly: "int(0,12)"
+    keep_yearly: "int(0,200)"
+  share:
+    enable_backup: bool
+    tags: list
+    exclude: list
+    enable_forget: bool
+    keep_daily: "int(0,31)"
+    keep_weekly: "int(0,52)"
+    keep_monthly: "int(0,12)"
+    keep_yearly: "int(0,200)"
 
