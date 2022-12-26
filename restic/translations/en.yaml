@@ -36,4 +36,14 @@ configuration:
     name: /ssl
     description: >-
       Include /ssl in the backup
+  pre_commands:
+    name: Pre backup commands
+    description: >-
+      Commands to execute prior to the backup.
+      If any of these commands fail, your backup WILL fail
+  post_commands: 
+    name: Post backup commands
+    description: >-
+      Commands to execute after the backup.
+      If any of these commands fail, your backup WILL fail
 ...
