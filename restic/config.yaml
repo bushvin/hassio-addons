@@ -1,6 +1,6 @@
 ---
 name: Restic Backups
-version: 0.0.2
+version: 0.0.3
 slug: restic
 description: Simple backups using restic
 arch:
@@ -23,4 +23,54 @@ tmpfs: true
 panel_icon: mdi:backup-restore
 panel_title: Restic Backups
 panel_admin: true
+options:
+  restic_repository: /share/restic
+  restic_password: ''
+  restic_hostname: hassio
+  restic_envvar: {}
+  addons:
+    enable_backup: true
+    tags:
+      - addons
+    exclude: []
+    enable_forget: true
+    keep_daily: 24
+    keep_weekly: 5
+    keep_monthly: 12
+    keep_yearly: 100
+  backup:
+    enable_backup: true
+    tags:
+      - backup
+    exclude: []
+    enable_forget: true
+    keep_daily: 24
+    keep_weekly: 5
+    keep_monthly: 12
+    keep_yearly: 100
+  config:
+    enable_backup: true
+    tags:
+      - config
+    exclude: []
+    enable_forget: true
+    keep_daily: 24
+    keep_weekly: 5
+    keep_monthly: 12
+    keep_yearly: 100
+  media:
+    enable_backup: true
+    tags:
+      - media
+    exclude: []
+    enable_forget: true
+    keep_daily: 24
+    keep_weekly: 5
+    keep_monthly: 12
+    keep_yearly: 100
+  share:
+    enable_backup: false
+    tags:
+      - share
+    exclude: []
 
