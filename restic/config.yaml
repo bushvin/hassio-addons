@@ -1,6 +1,6 @@
 ---
 name: Restic Backups
-version: 0.0.20
+version: 0.0.21
 slug: restic
 description: Backups done right!
 arch:
@@ -134,46 +134,46 @@ schema:
   restic_hostname: str
   restic_cacert: str
   restic_envvar:
-    AWS_ACCESS_KEY_ID: str
-    AWS_DEFAULT_REGION: str
-    AWS_PROFILE: str
-    AWS_SECRET_ACCESS_KEY: password
-    AWS_SESSION_TOKEN: str
-    AWS_SHARED_CREDENTIALS_FILE: str
-    AZURE_ACCOUNT_KEY: password
-    AZURE_ACCOUNT_NAME: str
-    AZURE_ACCOUNT_SAS: str
-    B2_ACCOUNT_ID: str
-    B2_ACCOUNT_KEY: password
-    GOOGLE_APPLICATION_CREDENTIALS: str
-    GOOGLE_PROJECT_ID: str
-    OS_APPLICATION_CREDENTIAL_ID: str
-    OS_APPLICATION_CREDENTIAL_NAME: str
-    OS_APPLICATION_CREDENTIAL_SECRET: password
-    OS_AUTH_TOKEN: password
-    OS_AUTH_URL: str
-    OS_PASSWORD: password
-    OS_PROJECT_DOMAIN_ID: str
-    OS_PROJECT_DOMAIN_NAME: str
-    OS_PROJECT_NAME: str
-    OS_REGION_NAME: str
-    OS_STORAGE_URL: str
-    OS_TENANT_ID: str
-    OS_TENANT_NAME: str
-    OS_TRUST_ID: str
-    OS_USER_DOMAIN_ID: str
-    OS_USER_DOMAIN_NAME: str
-    OS_USER_ID: str
-    OS_USERNAME: str
-    RCLONE_BWLIMIT: str
-    RESTIC_COMPRESSION: str
-    RESTIC_KEY_HINT: str
-    RESTIC_PACK_SIZE: str
-    RESTIC_PASSWORD_COMMAND: str
-    RESTIC_PROGRESS_FPS: str
-    ST_AUTH: str
-    ST_KEY: str
-    ST_USER: str
+    AWS_ACCESS_KEY_ID: str?
+    AWS_DEFAULT_REGION: str?
+    AWS_PROFILE: str?
+    AWS_SECRET_ACCESS_KEY: password?
+    AWS_SESSION_TOKEN: str?
+    AWS_SHARED_CREDENTIALS_FILE: str?
+    AZURE_ACCOUNT_KEY: password?
+    AZURE_ACCOUNT_NAME: str?
+    AZURE_ACCOUNT_SAS: str?
+    B2_ACCOUNT_ID: str?
+    B2_ACCOUNT_KEY: password?
+    GOOGLE_APPLICATION_CREDENTIALS: str?
+    GOOGLE_PROJECT_ID: str?
+    OS_APPLICATION_CREDENTIAL_ID: str?
+    OS_APPLICATION_CREDENTIAL_NAME: str?
+    OS_APPLICATION_CREDENTIAL_SECRET: password?
+    OS_AUTH_TOKEN: password?
+    OS_AUTH_URL: str?
+    OS_PASSWORD: password?
+    OS_PROJECT_DOMAIN_ID: str?
+    OS_PROJECT_DOMAIN_NAME: str?
+    OS_PROJECT_NAME: str?
+    OS_REGION_NAME: str?
+    OS_STORAGE_URL: str?
+    OS_TENANT_ID: str?
+    OS_TENANT_NAME: str?
+    OS_TRUST_ID: str?
+    OS_USER_DOMAIN_ID: str?
+    OS_USER_DOMAIN_NAME: str?
+    OS_USER_ID: str?
+    OS_USERNAME: str?
+    RCLONE_BWLIMIT: str?
+    RESTIC_COMPRESSION: str?
+    RESTIC_KEY_HINT: str?
+    RESTIC_PACK_SIZE: str?
+    RESTIC_PASSWORD_COMMAND: str?
+    RESTIC_PROGRESS_FPS: str?
+    ST_AUTH: str?
+    ST_KEY: str?
+    ST_USER: str?
   addons:
     enable_backup: bool
     tags:
