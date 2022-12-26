@@ -23,19 +23,22 @@ for b in addons backup config media share ssl; do
       cat <<EOF>/tmp/exclude.$b
 $(jq -r ".${b}.exclude|to_entries[]|(.value|tostring)" $OPTIONS)
 EOF
-      echo restic backup --verbose \
+      set -x
+      restic backup --verbose \
           --host=$restic_hostname \
           $tags \
           --cleanup-cache \
           --exclude-file=/tmp/exclude.$b \
           /${b}
+      set +x
 
       if test ${enable_forget,,} == "true"; then
           keep_daily=$(bashio::config ${b}.keep_daily 0)
           keep_weekly=$(bashio::config ${b}.keep_weekly 0)
           keep_monthly=$(bashio::config ${b}.keep_monthly 0)
           keep_yearly=$(bashio::config ${b}.keep_yearly 0)
-          echo restic forget --verbose \
+          set -x
+          restic forget --verbose \
               --host=$restic_hostname \
               $tags \
               --keep-daily $keep_daily \
@@ -43,6 +46,7 @@ EOF
               --keep-monthly $keep_monthly \
               --keep-yearly $keep_yearly \
               --prune
+          set +x
       fi
     fi
 done
