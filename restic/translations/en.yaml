@@ -1,0 +1,67 @@
+---
+configuration:
+  restic_repository:
+    name: Restic Repository
+    description: >-
+      The path to the restic repository
+  restic_password:
+    name: Restic Repository Password
+    description: >-
+      The password for the restic repository
+  addons:
+    name: /addons
+    description: >-
+      Include /addons in the backup
+  backup:
+    name: /backup
+    description: >-
+      Include /backup in the backup
+  config:
+    name: /config
+    description: >-
+      Include /config in the backup
+  media:
+    name: /media
+    description: >-
+      Include /media in the backup
+  share:
+    name: /share
+    description: >-
+      Include /share in the backup
+  ssl:
+    name: /ssl
+    description: >-
+      Include /ssl in the backup
+  enable_backup:
+    name: Enable Backup
+    description: >-
+      Enable the backup for the specified directory
+  tags:
+    name: Backup tags
+    description: >-
+      Assign these tags to the backup
+  exclude:
+    name: Exclude files
+    description: >-
+      A list of file patterns to exclude
+  enable_forget:
+    name: Enable forget
+    description: >-
+      Forget about snapshots according to the retention settings
+  keep_daily:
+    name: Daily snapshots
+    description: >-
+      Keep the last n daily snapshots
+  keep_weekly:
+    name: Weekly snapshots
+    description: >-
+      Keep the last n weekly snapshots
+  keep_monthly:
+    name: Monthly snapshots
+    description: >-
+      Keep the last n monthly snapshots
+  keep_yearly:
+    name: Yearly snapshots
+    description: >-
+      Keep the last n yearly snapshots
+...

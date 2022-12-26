@@ -1,0 +1,52 @@
+#!/usr/bin/with-contenv bashio
+
+echo "Running restic backup"
+date
+set -e
+
+mkdir -p /data/restic-cache
+OPTIONS=/data/options.json
+$(jq -r ".restic_envvar|to_entries[]|\"export \" + .key + \"=\" + (.value|tostring) + \"\"" $OPTIONS)
+
+# These should never be overridden
+export RESTIC_REPOSITORY=$(jq -r '.restic_repository' $OPTIONS)
+export RESTIC_PASSWORD=$(jq -r '.restic_password' $OPTIONS)
+export RESTIC_CACHE_DIR=/data/restic-cache
+export TMPDIR=/tmp
+
+for b in addons backup config media share ssl; do
+    enable_backup=$(jq -r ".${b}.enable_backup" $OPTIONS)
+    enable_forget=$(jq -r ".${b}.enable_forget" $OPTIONS)
+    if test ${enable_backup,,} == "true"; then
+      restic_tags=$(jq -r ".${b}.tags|to_entries[]|\"--tag \" + (.value|tostring) + \"\"" $OPTIONS)
+      restic_hostname=$(jq -r '.restic_hostname' $OPTIONS)
+      cat <<EOF>/tmp/exclude.$b
+$(jq -r ".${b}.exclude|to_entries[]|(.value|tostring)" $OPTIONS)
+EOF
+      if test $restic_hostname == ""; then
+          restic_hostname=hassio
+      fi
+      restic backup --verbose \
+          --host=$restic_hostname \
+          $tags \
+          --cleanup-cache \
+          --exclude-file=/tmp/exclude.$b \
+          /${b}
+
+      if test ${enable_forget,,} == "true"; then
+          keep_daily=$(jq -r ".${b}.keep_daily" $OPTIONS)
+          keep_weekly=$(jq -r ".${b}.keep_weekly" $OPTIONS)
+          keep_monthly=$(jq -r ".${b}.keep_monthly" $OPTIONS)
+          keep_yearly=$(jq -r ".${b}.keep_yearly" $OPTIONS)
+          restic forget --verbose \
+              --host=$restic_hostname \
+              $tags \
+              --keep-daily $keep_daily \
+              --keep-weekly $keep_weekly \
+              --keep-monthly $keep_monthly \
+              --keep-yearly $keep_yearly \
+              --prune
+      fi
+    fi
+done
+
