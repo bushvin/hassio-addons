@@ -1,6 +1,6 @@
 ---
 name: Restic Backups
-version: 1.0.0
+version: 0.0.1
 slug: restic
 description: Simple backups using restic
 arch:
@@ -17,4 +17,7 @@ map:
   - media:ro
   - share:rw
   - ssl:ro
+privileged:
+  - DAC_READ_SEARCH
+tmpfs: true
 
