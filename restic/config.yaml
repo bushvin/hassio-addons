@@ -1,6 +1,6 @@
 ---
 name: Restic Backups
-version: 0.0.19
+version: 0.0.20
 slug: restic
 description: Backups done right!
 arch:
@@ -17,14 +17,11 @@ map:
   - backup:ro
   - config:ro
   - media:ro
-  - share:rw
+  - share:ro
   - ssl:ro
 privileged:
   - DAC_READ_SEARCH
 tmpfs: true
-panel_icon: mdi:backup-restore
-panel_title: Restic Backups
-panel_admin: true
 options:
   restic_repository: /share/restic
   restic_password: ''
@@ -71,8 +68,6 @@ options:
     ST_AUTH: ""
     ST_KEY: ""
     ST_USER: ""
-  pre_commands: ""
-  post_commands: ""
   addons:
     enable_backup: false
     tags:
@@ -179,8 +174,6 @@ schema:
     ST_AUTH: str
     ST_KEY: str
     ST_USER: str
-  pre_commands: str
-  post_commands: str
   addons:
     enable_backup: bool
     tags:
