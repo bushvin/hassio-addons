@@ -21,6 +21,11 @@ else
     restic_cacert=""
 fi
 
+cat <<EOF> /tmp/pre
+$(bashio::config pre_commands)
+EOF
+bash -x /tmp/pre
+
 for b in addons backup config media share ssl; do
     enable_backup=$(bashio::config ${b}.enable_backup)
     enable_forget=$(bashio::config ${b}.enable_forget)
@@ -61,6 +66,11 @@ EOF
         echo "Skipping backup of /$b"
     fi
 done
+
+cat <<EOF> /tmp/post
+$(bashio::config post_commands)
+EOF
+bash -x /tmp/post
 
 echo "Restic Backup finished"
 date

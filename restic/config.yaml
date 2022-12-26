@@ -1,6 +1,6 @@
 ---
 name: Restic Backups
-version: 1.0.0
+version: 1.0.1
 slug: restic
 description: Backups done right!
 arch:
@@ -27,6 +27,8 @@ options:
   restic_password: ''
   restic_hostname: hassio
   restic_cacert: ""
+  pre_commands: ""
+  post_commands: ""
   restic_envvar:
     AWS_ACCESS_KEY_ID: ""
     AWS_DEFAULT_REGION: ""
@@ -133,6 +135,8 @@ schema:
   restic_password: password
   restic_hostname: str
   restic_cacert: str
+  pre_commands: str
+  post_commands: str
   restic_envvar:
     AWS_ACCESS_KEY_ID: str?
     AWS_DEFAULT_REGION: str?
