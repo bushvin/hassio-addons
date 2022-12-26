@@ -1,6 +1,6 @@
 ---
 name: Restic Backups
-version: 0.0.13
+version: 0.0.14
 slug: restic
 description: Backups done right!
 arch:
@@ -11,6 +11,7 @@ arch:
   - i386
 url: https://github.com/bushvin/hassio-addons
 boot: manual
+init: false
 map:
   - addons:ro
   - backup:ro
