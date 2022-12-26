@@ -10,4 +10,11 @@ arch:
   - armv7
   - i386
 url: https://github.com/bushvin/hassio-addons
+map:
+  - addons:ro
+  - backup:ro
+  - config:ro
+  - media:ro
+  - share:rw
+  - ssl:ro
 
