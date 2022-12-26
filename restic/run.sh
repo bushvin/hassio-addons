@@ -26,7 +26,7 @@ EOF
       set -x
       restic backup --verbose \
           --host=$restic_hostname \
-          $tags \
+          $restic_tags \
           --cleanup-cache \
           --exclude-file=/tmp/exclude.$b \
           /${b}
@@ -40,7 +40,7 @@ EOF
           set -x
           restic forget --verbose \
               --host=$restic_hostname \
-              $tags \
+              $restic_tags \
               --keep-daily $keep_daily \
               --keep-weekly $keep_weekly \
               --keep-monthly $keep_monthly \
