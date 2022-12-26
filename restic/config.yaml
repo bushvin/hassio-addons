@@ -1,6 +1,6 @@
 ---
 name: Restic Backups
-version: 0.0.1
+version: 0.0.2
 slug: restic
 description: Simple backups using restic
 arch:
@@ -20,4 +20,7 @@ map:
 privileged:
   - DAC_READ_SEARCH
 tmpfs: true
+panel_icon: mdi:backup-restore
+panel_title: Restic Backups
+panel_admin: true
 
