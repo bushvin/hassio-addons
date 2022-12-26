@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0
+
+- only fail pre and post commands if their exit is not 0
+
 ## 1.1.1
 
 - bugfix: /share should be r/w

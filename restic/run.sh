@@ -21,10 +21,17 @@ else
     restic_cacert=""
 fi
 
+set +e
 cat <<EOF> /tmp/pre
 $(bashio::config pre_commands)
 EOF
 bash -x /tmp/pre
+RC=$?
+set -e
+if test $RC -ne 0; then
+    echo "pre commands execution failed"
+    exit $RC
+fi
 
 for b in addons backup config media share ssl; do
     enable_backup=$(bashio::config ${b}.enable_backup)
@@ -67,10 +74,17 @@ EOF
     fi
 done
 
+set +e
 cat <<EOF> /tmp/post
 $(bashio::config post_commands)
 EOF
 bash -x /tmp/post
+RC=$?
+set -e
+if test $RC -ne 0; then
+    echo "post commands execution failed"
+    exit $RC
+fi
 
 echo "Restic Backup finished"
 date
