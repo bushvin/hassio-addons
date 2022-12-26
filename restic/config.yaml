@@ -9,4 +9,5 @@ arch:
   - armhf
   - armv7
   - i386
+url: https://github.com/bushvin/hassio-addons
 
