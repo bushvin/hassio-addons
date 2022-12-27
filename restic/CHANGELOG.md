@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- change default for keep\_daily to 7
 - config.yaml url correction
 
 ## [1.2.0] - 2022-12-26
