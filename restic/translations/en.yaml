@@ -8,8 +8,16 @@ configuration:
     name: Restic Repository Password
     description: >-
       The password for the restic repository
+  restic_hostname:
+    name: Restic Repository Hostname
+    description: >-
+      Set the hostname for the snapshot manually.
+  restic_cacert:
+    name: Root Certificate path
+    description: >-
+      File to load root certificates from
   restic_envvar:
-    name: Environment variables
+    name: Restic Environment variables
     description: >-
       Additional restic related environment variables.
   addons:
@@ -41,7 +49,7 @@ configuration:
     description: >-
       Commands to execute prior to the backup.
       If any of these commands fail, your backup WILL fail
-  post_commands: 
+  post_commands:
     name: Post backup commands
     description: >-
       Commands to execute after the backup.
