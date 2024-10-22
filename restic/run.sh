@@ -21,6 +21,12 @@ else
     restic_cacert=""
 fi
 
+if test "$(bashio::config restic_insecure_tls)" == "true"; then
+    restic_insecure_tls="--insecure-tls"
+else
+    restic_insecure_tls=""
+fi
+
 set +e
 cat <<EOF> /tmp/pre
 $(bashio::config pre_commands)
@@ -45,6 +51,7 @@ EOF
       restic cache --cleanup
       restic backup --verbose \
           $restic_cacert \
+          $restic_insecure_tls \
           --host=$restic_hostname \
           $restic_tags \
           --cleanup-cache \
@@ -60,6 +67,7 @@ EOF
           set -x
           restic forget --verbose \
               $restic_cacert \
+              $restic_insecure_tls \
               --host=$restic_hostname \
               $restic_tags \
               --keep-daily $keep_daily \

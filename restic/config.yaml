@@ -27,6 +27,7 @@ options:
   restic_password: ''
   restic_hostname: hassio
   restic_cacert: ""
+  restic_insecure_tls: false
   pre_commands: ""
   post_commands: ""
   restic_envvar:
@@ -135,6 +136,7 @@ schema:
   restic_password: password
   restic_hostname: str
   restic_cacert: str
+  restic_insecure_tls: bool
   pre_commands: str
   post_commands: str
   restic_envvar:

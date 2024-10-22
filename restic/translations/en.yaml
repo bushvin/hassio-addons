@@ -16,6 +16,10 @@ configuration:
     name: Root Certificate path
     description: >-
       File to load root certificates from
+  restic_insecure_tls:
+    name: Skip certificate validation
+    description: >-
+      skip TLS certificate verification when connecting to the repository (insecure)
   restic_envvar:
     name: Restic Environment variables
     description: >-
