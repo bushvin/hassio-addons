@@ -79,6 +79,7 @@ EOF
           if test "$(bashio::config restic_repack_uncompressed)" == "true" && test $(restic $restic_cacert $restic_insecure_tls cat config | jq -r .version) -ge 2; then
               restic_repack_uncompressed="--repack-uncompressed"
           fi
+          set -x
           restic prune --verbose \
               $restic_cacert \
               $restic_insecure_tls \
