@@ -74,8 +74,15 @@ EOF
               --keep-daily $keep_daily \
               --keep-weekly $keep_weekly \
               --keep-monthly $keep_monthly \
-              --keep-yearly $keep_yearly \
-              --prune
+              --keep-yearly $keep_yearly
+          set +x
+          if test "$(bashio::config restic_repack_uncompressed)" == "true" && test $(restic $restic_cacert $restic_insecure_tls cat config | jq -r .version) -ge 2; then
+              restic_repack_uncompressed="--repack-uncompressed"
+          fi
+          restic prune --verbose \
+              $restic_cacert \
+              $restic_insecure_tls \
+              $restic_repack_uncompressed
           set +x
       fi
     else

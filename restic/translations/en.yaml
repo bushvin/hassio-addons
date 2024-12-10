@@ -20,6 +20,10 @@ configuration:
     name: Skip certificate validation
     description: >-
       skip TLS certificate verification when connecting to the repository (insecure)
+  restic_repack_uncompressed:
+    name: repack all uncompressed data
+    description: >
+      repack all data which is uncompressed
   restic_envvar:
     name: Restic Environment variables
     description: >-
