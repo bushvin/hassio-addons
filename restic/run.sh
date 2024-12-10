@@ -48,6 +48,7 @@ for b in addons backup config media share ssl; do
 $(jq -r ".${b}.exclude|to_entries[]|(.value|tostring)" $OPTIONS)
 EOF
       set -x
+      restic version
       restic cache --cleanup
       restic backup --verbose \
           $restic_cacert \
