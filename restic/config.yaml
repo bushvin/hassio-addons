@@ -138,6 +138,7 @@ schema:
   restic_hostname: str
   restic_cacert: str
   restic_insecure_tls: bool
+  restic_repack_uncompressed: bool
   pre_commands: str
   post_commands: str
   restic_envvar:
