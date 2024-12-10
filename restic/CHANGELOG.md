@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- unbound variable error
+
+## [1.5.1] - 2024-12-10
+
+### Fixed
+
 - schema
 
 ## [1.5.0] - 2024-12-10

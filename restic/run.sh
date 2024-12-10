@@ -83,7 +83,7 @@ EOF
           restic prune --verbose \
               $restic_cacert \
               $restic_insecure_tls \
-              $restic_repack_uncompressed
+              ${restic_repack_uncompressed:-}
           set +x
       fi
     else
