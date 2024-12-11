@@ -17,8 +17,7 @@ RUN apk update && apk add --no-cache \
     tzdata
 
 WORKDIR /tmp
-RUN git clone https://github.com/SBFspot/SBFspot.git . && \
-    git checkout tags/v${SBFSPOT_VERSION} -b version-${SBFSPOT_VERSION}
+RUN git clone https://github.com/SBFspot/SBFspot.git .
 
 WORKDIR /tmp/SBFspot
 RUN sed -i s-\#ifdef\ linux-\#ifdef\ linux\\n\#include\ \<sys\/select.h\>- Ethernet.h
