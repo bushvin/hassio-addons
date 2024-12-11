@@ -159,12 +159,12 @@ LABEL \
 
 COPY ./run.sh /
 
-RUN addgroup -g $gid -S group
-RUN adduser -S -D -G $group -H -u $uid $user
+# RUN addgroup -g $gid -S group
+# RUN adduser -S -D -G $group -H -u $uid $user
 RUN mkdir /etc/sbfspot
-RUN chown $uid:$gid /etc/sbfspot
-RUN chmod u+x /start.sh
-RUN chown $user:$group /start.sh
+# RUN chown $uid:$gid /etc/sbfspot
+RUN chmod u+x /run.sh
+# RUN chown $user:$group /run.sh
 
 USER $user
 
