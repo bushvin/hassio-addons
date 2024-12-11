@@ -28,4 +28,4 @@ RUN echo ${BUILD_ARCH} > /etc/sbfspot/test
 
 USER ${SBFSPOT_USER}
 
-ENTRYPOINT [ "/run.sh" ]
+CMD [ "/run.sh" ]
