@@ -74,6 +74,7 @@ FROM $BUILD_FROM
 # ENV SBFSPOT_INTERVAL 300
 
 ARG TEMPIO_VERSION BUILD_ARCH
+ARG SBFSPOT_USER SBFSPOT_GROUP SBFSPOT_UID SBFSPOT_GID
 
 RUN \
     curl -sSLf -o /usr/bin/tempio \
@@ -110,8 +111,8 @@ WORKDIR /usr/local/bin
 COPY --from=builder-base /tmp/SBFspot/nosql/bin/SBFspot /usr/local/bin/SBFspot_nosql
 # COPY --from=builder-base /tmp/SBFspot/mariadb/bin/SBFspot /usr/bin/sbfspot/SBFspot
 # COPY --from=builder-base /tmp/SBFspotUploadDaemon/mariadb/bin/SBFspotUploadDaemon /usr/bin/sbfspot/SBFspotUploadDaemon
-COPY --from=builder-base /tmp/SBFspot/date_time_zonespec.csv /usr/bin/sbfspot/date_time_zonespec.csv
-COPY --from=builder-base /tmp/SBFspot/TagList* /usr/bin/sbfspot/
+COPY --from=builder-base /tmp/SBFspot/date_time_zonespec.csv /usr/local/bin/date_time_zonespec.csv
+COPY --from=builder-base /tmp/SBFspot/TagList* /usr/local/bin/
 
 # COPY --from=builder-base /tmp/SBFspot/mariadb/bin/SBFspot /usr/bin/sbfspot/SBFspot
 # COPY --from=builder-base /tmp/SBFspotUploadDaemon/mariadb/bin/SBFspotUploadDaemon /usr/bin/sbfspot/SBFspotUploadDaemon
@@ -161,15 +162,17 @@ LABEL \
 
 COPY ./run.sh /
 
-# RUN addgroup -g $gid -S group
-# RUN adduser -S -D -G $group -H -u $uid $user
+ARG SBFSPOT_USER SBFSPOT_GROUP SBFSPOT_UID SBFSPOT_GID
+
+# RUN addgroup -g ${SBFSPOT_GID} -S ${SBFSPOT_GROUP}
+# RUN adduser -S -D -G ${SBFSPOT_GROUP} -H -u ${SBFSPOT_UID} ${SBFSPOT_USER}
 RUN mkdir /etc/sbfspot
-# RUN chown $uid:$gid /etc/sbfspot
+RUN chown ${SBFSPOT_USER}:${SBFSPOT_GROUP} /etc/sbfspot
 RUN chmod u+x /run.sh
-# RUN chown $user:$group /run.sh
+RUN chown ${SBFSPOT_USER}:${SBFSPOT_GROUP} /run.sh
 
-# USER $user
+# USER ${SBFSPOT_USER}
 
-ENTRYPOINT ["/start.sh"]
+ENTRYPOINT ["/run.sh"]
 #Launch nginx with debug options. not working yet
 #CMD [ "nginx","-g","daemon off;error_log /dev/stdout debug;" ]
