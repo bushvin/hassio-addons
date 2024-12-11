@@ -5,6 +5,8 @@ FROM $BUILD_FROM AS builder-base
 
 # Execute during the build of the image
 ARG TEMPIO_VERSION BUILD_ARCH
+ARG SBFSPOT_VERSION=3.9.11
+
 RUN \
     curl -sSLf -o /usr/bin/tempio \
     "https://github.com/home-assistant/tempio/releases/download/${TEMPIO_VERSION}/tempio_${BUILD_ARCH}"
@@ -39,9 +41,9 @@ RUN apk update && apk add --no-cache \
 # download and build SBFspot
 WORKDIR /tmp
 RUN git clone https://github.com/sbfspot/SBFspot.git .
-RUN git checkout tags/v3.9.11 -b version-3.9.11
 
 WORKDIR /tmp/SBFspot
+RUN git checkout tags/v${SBFSPOT_VERSION} -b version-${SBFSPOT_VERSION}
 RUN sed -i s-\#ifdef\ linux-\#ifdef\ linux\\n\#include\ \<sys\/select.h\>- Ethernet.h
 RUN sed -i s-\#ifdef\ linux-\#ifdef\ linux\\n\#include\ \<sys\/select.h\>- bluetooth.h
 RUN sed -i s/mariadbclient/mariadb/ makefile
