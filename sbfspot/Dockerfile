@@ -157,7 +157,7 @@ LABEL \
     org.label-schema.vcs-url="https://github.com/bushvin/hassio-addons" \
     org.label-schema.vendor="bushvin"
 
-COPY ./start.sh /
+COPY ./run.sh /
 
 RUN addgroup -g $gid -S group
 RUN adduser -S -D -G $group -H -u $uid $user
