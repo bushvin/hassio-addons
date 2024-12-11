@@ -105,7 +105,7 @@ RUN apk update && apk add --no-cache \
 # Copy data for add-on
 WORKDIR /usr/bin/sbfspot
 
-COPY --from=builder-base /tmp/SBFspot/nosql/bin/SBFspot /usr/bin/sbfspot/SBFspot_nosql
+COPY --from=builder-base /tmp/SBFspot/nosql/bin/SBFspot /usr/local/bin/SBFspot_nosql
 # COPY --from=builder-base /tmp/SBFspot/mariadb/bin/SBFspot /usr/bin/sbfspot/SBFspot
 # COPY --from=builder-base /tmp/SBFspotUploadDaemon/mariadb/bin/SBFspotUploadDaemon /usr/bin/sbfspot/SBFspotUploadDaemon
 COPY --from=builder-base /tmp/SBFspot/date_time_zonespec.csv /usr/bin/sbfspot/date_time_zonespec.csv
@@ -123,7 +123,7 @@ COPY --from=builder-base /tmp/SBFspot/TagList* /usr/bin/sbfspot/
 # && cp /tmp/SBFspot/date_time_zonespec.csv /usr/bin/sbfspot \
 # && cp /tmp/SBFspot/TagList* /usr/bin/sbfspot
 
-RUN chmod a+x /etc/services.d/sbfspot/** /usr/bin/sbfspot/**
+RUN chmod a+x /usr/local/bin/SBFspot_nosql
 
 # # --- install cron ---
 # # set shell
