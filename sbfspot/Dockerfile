@@ -164,8 +164,8 @@ COPY ./run.sh /
 
 # ARG SBFSPOT_USER SBFSPOT_GROUP SBFSPOT_UID SBFSPOT_GID
 
-# RUN addgroup -g ${SBFSPOT_GID} -S ${SBFSPOT_GROUP}
-# RUN adduser -S -D -G ${SBFSPOT_GROUP} -H -u ${SBFSPOT_UID} ${SBFSPOT_USER}
+RUN addgroup -g ${SBFSPOT_GID} -S ${SBFSPOT_GROUP}
+RUN adduser -S -D -G ${SBFSPOT_GROUP} -H -u ${SBFSPOT_UID} ${SBFSPOT_USER}
 RUN mkdir /etc/sbfspot
 RUN chown ${SBFSPOT_USER}:${SBFSPOT_GROUP} /etc/sbfspot
 RUN chmod u+x /run.sh
