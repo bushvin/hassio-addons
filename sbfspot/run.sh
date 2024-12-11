@@ -118,18 +118,14 @@ if [ "${SBFSPOT_SQLITE_EXPORT}" = "false" ] && [ "${SBFSPOT_MARIADB_EXPORT}" = "
 fi
 [ "${SBFSPOT_MQTT_EXPORT}" = "true" ] && SBFSPOT_BIN_ARGS="${SBFSPOT_BIN_ARGS} -mqtt"
 
-cat "${conffile}"
-
 while true; do
     echo "Start: $(date)"
     echo "Arguments: ${SBFSPOT_BIN_ARGS}"
-
-    # printf "Start: %s" $(date)
-    # printf "Arguments: %s" ${SBFSPOT_BIN_ARGS}
-    # timeout --foreground 180 /usr/local/bin/SBFspot_nosql ${SBFSPOT_BIN_ARGS}
+    START_TIMESTAMP=$(date +%s)
+    timeout --foreground 180 /usr/local/bin/SBFspot_nosql ${SBFSPOT_BIN_ARGS}
+    END_TIMESTAMP=$(date +%s)
+    INTERVAL=$(( $SBFSPOT_INTERVAL - $END_TIMESTAMP + $START_TIMESTAMP ))
     echo "End: $(date)"
-    echo "Waiting for ${SBFSPOT_INTERVAL} seconds..."
-    # printf "End: %s" $(date)
-    # printf "Waiting for %d seconds..." ${SBFSPOT_INTERVAL}
-    sleep ${SBFSPOT_INTERVAL}
+    echo "Waiting for ${INTERVAL} seconds..."
+    sleep ${INTERVAL}
 done

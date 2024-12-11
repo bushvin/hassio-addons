@@ -16,7 +16,7 @@ host_dbus: true
 map:
   - share: rw
 options:
-  sbfspot_interval: 600
+  sbfspot_interval: 300
   connection_type: bluetooth
   inverter_bluetooth_address: "00:00:00:00:00:00"
   inverter_bluetooth_retries: 10
