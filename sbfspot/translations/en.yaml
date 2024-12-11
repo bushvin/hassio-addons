@@ -1,0 +1,66 @@
+---
+configuration:
+  sbfspot_interval:
+    name: SBFspot inverter query interval
+  connection_type:
+    name: SBFspot connection type
+  inverter_bluetooth_address:
+    name: Inverter bluetooth address
+  inverter_bluetooth_retries:
+    name: Inverter bluetooth retries
+  inverter_password:
+    name: Inverter password
+  inverter_ip_address:
+    name: Inverter Speedwire IP address
+  local_bluetooth_address:
+    name: Local bluetooth address
+  multi_inverter_support:
+    name: Multi Inverter Support
+  plantname:
+    name: Plant Name
+  inverter_latitude:
+    name: Latitude
+  inverter_longitude:
+    name: Longitude
+  inverter_cmsv:
+    name: Calculate Missing Spot Values
+  datetime_format:
+    name: Date Time Format
+  date_format:
+    name: Date Format
+  time_format:
+    name: Time Format
+  field_delimiter:
+    name: Field Delimiter
+  synctime:
+    name: Sync Inverter's time to local time
+  synctime_low:
+    name: Sync time difference low
+  synctime_high:
+    name: Sync time difference high
+  sunRSOffset:
+    name: Sunrise/Sunset start offset
+  locale:
+    name: Locale
+  timezone:
+    name: Timezone
+  mqtt_export:
+    name: Export to MQTT
+  mqtt_publisher:
+    name: MQTT publisher bin
+  mqtt_hostname:
+    name: MQTT hostname or IP address
+  mqtt_port:
+    name: MQTT port
+  mqtt_user:
+    name: MQTT Username
+  mqtt_password:
+    name: MQTT Password
+  mqtt_topic:
+    name: MQTT Topic
+  mqtt_format:
+    name: MQTT Format
+  mqtt_arguments:
+    name: Additional arguments to MQTT publisher
+  mqtt_data:
+    name: MQTT data sent
