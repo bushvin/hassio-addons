@@ -9,6 +9,7 @@
 
 args:
   TEMPIO_VERSION: "2024.11.2"
+  SBFSPOT_VERSION: "3.9.11"
   SBFSPOT_USER: "sbfspot"
   SBFSPOT_GROUP: sbfspot
   SBFSPOT_UID: "5000"

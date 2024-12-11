@@ -54,6 +54,7 @@ echo > $conffile
 if [ "${SBFSPOT_CONNECTION_TYPE}" = "bluetooth" ]; then
     setConfigValue BTAddress "${SBFSPOT_INVERTER_BTADDRESS}"
     setConfigValue BTConnectRetries "${SBFSPOT_INVERTER_BTRETRIES}"
+    [ "${SBFSPOT_LOCAL_BTADDRESS}" != "00:00:00:00:00:00" ] && setConfigValue LocalBTAddress "${SBFSPOT_LOCAL_BTADDRESS}"
 fi
 
 setConfigValue Password "${SBFSPOT_INVERTER_PASSWORD}"
