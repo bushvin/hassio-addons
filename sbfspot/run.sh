@@ -99,7 +99,7 @@ if [ "${SBFSPOT_MQTT_EXPORT}" = "true" ]; then
     if [ "${SBFSPOT_MQTT_FORMAT}" = "json" ]; then
         setConfigValue MQTT_ItemFormat "\"{key}\": {value}"
         setConfigValue MQTT_ItemDelimiter comma
-        setConfigValue MQTT_PublisherArgs "${SBFSPOT_MQTT_BIN_ARGS} -t \"{topic}\" -m \"{{message}}\" ${SBFSPOT_MQTT_ARGUMENTS[*]}
+        setConfigValue MQTT_PublisherArgs "${SBFSPOT_MQTT_BIN_ARGS} -t \"{topic}\" -m \"{{message}}\" ${SBFSPOT_MQTT_ARGUMENTS[*]}"
     elif [ "${SBFSPOT_MQTT_FORMAT}" = "text" ]; then
         setConfigValue MQTT_ItemFormat "{key}:{value}"
         setConfigValue MQTT_ItemDelimiter semicolon
