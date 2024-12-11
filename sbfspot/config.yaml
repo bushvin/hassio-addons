@@ -3,6 +3,7 @@ name: SBFspot
 version: 0.0.3
 slug: sbfspot
 description: SBFspot Add-On
+stage: experimental
 arch:
   - armhf
   - armv7
@@ -12,10 +13,8 @@ url: https://github.com/bushvin/hassio-addons/tree/main/sbfspot
 init: false
 host_network: true
 host_dbus: true
-# map:
-#   - share: rw
-services:
-  - mqtt:want
+map:
+  - share: rw
 options:
   sbfspot_interval: 600
   connection_type: bluetooth
