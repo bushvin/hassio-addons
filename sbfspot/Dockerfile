@@ -46,12 +46,15 @@ RUN git clone https://github.com/sbfspot/SBFspot.git .
 WORKDIR /tmp/SBFspot
 RUN sed -i s-\#ifdef\ linux-\#ifdef\ linux\\n\#include\ \<sys\/select.h\>- Ethernet.h
 RUN sed -i s-\#ifdef\ linux-\#ifdef\ linux\\n\#include\ \<sys\/select.h\>- bluetooth.h
-RUN sed -i s/mariadbclient/mariadb/ makefile
+#RUN sed -i s/mariadbclient/mariadb/ makefile
 
-RUN make nosql && make sqlite && make mysql && make mariadb
+RUN make nosql
+#RUN make sqlite
+#RUN make mysql
+#RUN make mariadb
 
-WORKDIR /tmp/SBFspotUploadDaemon
-RUN make nosql && make sqlite && make mysql && make mariadb
+# WORKDIR /tmp/SBFspotUploadDaemon
+# RUN make nosql && make sqlite && make mysql && make mariadb
 
     # && sed -i s/mariadbclient/mariadb/ ./SBFspot/makefile \
     # && make -C ./SBFspot mariadb \
@@ -103,7 +106,7 @@ RUN apk update && apk add --no-cache \
 WORKDIR /usr/bin/sbfspot
 
 COPY --from=builder-base /tmp/SBFspot/mariadb/bin/SBFspot /usr/bin/sbfspot/SBFspot
-COPY --from=builder-base /tmp/SBFspotUploadDaemon/mariadb/bin/SBFspotUploadDaemon /usr/bin/sbfspot/SBFspotUploadDaemon
+# COPY --from=builder-base /tmp/SBFspotUploadDaemon/mariadb/bin/SBFspotUploadDaemon /usr/bin/sbfspot/SBFspotUploadDaemon
 COPY --from=builder-base /tmp/SBFspot/date_time_zonespec.csv /usr/bin/sbfspot/date_time_zonespec.csv
 COPY --from=builder-base /tmp/SBFspot/TagList* /usr/bin/sbfspot/
 
