@@ -114,7 +114,7 @@ cat "${$conffile}"
 while true; do
     printf "Start: %s" $(date)
     printf "Arguments: %s" ${SBFSPOT_BIN_ARGS}
-    timeout --foreground 180 /usr/local/bin/SBFspot_nosql ${SBFSPOT_BIN_ARGS}
+    # timeout --foreground 180 /usr/local/bin/SBFspot_nosql ${SBFSPOT_BIN_ARGS}
     printf "End: %s" $(date)
     printf "Waiting for %d seconds..." ${SBFSPOT_INTERVAL}
     sleep ${SBFSPOT_INTERVAL}

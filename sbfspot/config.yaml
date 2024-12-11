@@ -1,6 +1,6 @@
 ---
 name: SBFspot
-version: 0.0.1
+version: 0.0.2
 slug: sbfspot
 description: SBFspot Add-On
 arch:
@@ -47,8 +47,23 @@ options:
   mqtt_password: ""
   mqtt_topic: "sbfspot_{serial}"
   mqtt_format: json
-  mqtt_arguments: ""
-  mqtt_data: "Timestamp,SunRise,SunSet,InvSerial,InvName,InvTime,InvStatus,InvTemperature,InvGridRelay,EToday,ETotal,PACTot,UDC,IDC,PDC"
+  mqtt_arguments: []
+  mqtt_data:
+  - Timestamp
+  - SunRise
+  - SunSet
+  - InvSerial
+  - InvName
+  - InvTime
+  - InvStatus
+  - InvTemperature
+  - InvGridRelay
+  - EToday
+  - ETotal
+  - PACTot
+  - UDC
+  - IDC
+  - PDC
 schema:
   sbfspot_interval: int
   connection_type: list(bluetooth|speedwire)
@@ -76,12 +91,12 @@ schema:
   mqtt_publisher: str
   mqtt_hostname: str
   mqtt_port: int
-  mqtt_user: str
-  mqtt_password: password
+  mqtt_user: str?
+  mqtt_password: password?
   mqtt_topic: str
   mqtt_format: list(json|text|xml)
   mqtt_arguments:
-  - str
+  - str?
   mqtt_data:
   - str
 

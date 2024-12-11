@@ -4,8 +4,10 @@ ARG BUILD_FROM
 FROM $BUILD_FROM AS builder-base
 
 # Execute during the build of the image
+#ARG TEMPIO_VERSION BUILD_ARCH
 ARG TEMPIO_VERSION BUILD_ARCH
 ARG SBFSPOT_VERSION=3.9.11
+ARG TEMPIO_VERSION=2024.11.2
 
 RUN \
     curl -sSLf -o /usr/bin/tempio \
