@@ -51,7 +51,7 @@ setConfigValue() {
     echo "${key}=${value}" >> ${conffile}
 }
 echo > $conffile
-if [ "${SBFSPOT_CONNECTION_TYPE}" = "bluetooth"]; then
+if [ "${SBFSPOT_CONNECTION_TYPE}" = "bluetooth" ]; then
     setConfigValue BTAddress "${SBFSPOT_INVERTER_BTADDRESS}"
     setConfigValue BTConnectRetries "${SBFSPOT_INVERTER_BTRETRIES}"
 fi
@@ -103,13 +103,13 @@ if [ "${SBFSPOT_MQTT_EXPORT}" = "true" ]; then
     setConfigValue MQTT_Data ${SBFSPOT_MQTT_DATA}
 fi
 
-[ "${SBFSPOT_CSV_EXPORT}" = "false"] && SBFSPOT_BIN_ARGS="${SBFSPOT_BIN_ARGS} -nocsv"
+[ "${SBFSPOT_CSV_EXPORT}" = "false" ] && SBFSPOT_BIN_ARGS="${SBFSPOT_BIN_ARGS} -nocsv"
 if [ "${SBFSPOT_SQLITE_EXPORT}" = "false" ] && [ "${SBFSPOT_MARIADB_EXPORT}" = "false" ] && [ "${SBFSPOT_MYSQL_EXPORT}" = "false" ]; then
     SBFSPOT_BIN_ARGS="${SBFSPOT_BIN_ARGS} -nosql"
 fi
 [ "${SBFSPOT_MQTT_EXPORT}" = "true" ] && SBFSPOT_BIN_ARGS="${SBFSPOT_BIN_ARGS} -mqtt"
 
-cat "${$conffile}"
+cat "${conffile}"
 
 while true; do
     printf "Start: %s" $(date)
