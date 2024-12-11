@@ -99,17 +99,17 @@ if [ "${SBFSPOT_MQTT_EXPORT}" = "true" ]; then
     if [ "${SBFSPOT_MQTT_FORMAT}" = "json" ]; then
         setConfigValue MQTT_ItemFormat "\"{key}\": {value}"
         setConfigValue MQTT_ItemDelimiter comma
-        setConfigValue MQTT_PublisherArgs "${SBFSPOT_MQTT_BIN_ARGS} -t \"{topic}\" -m \"{{message}}\" ${SBFSPOT_MQTT_ARGUMENTS}"
+        setConfigValue MQTT_PublisherArgs "${SBFSPOT_MQTT_BIN_ARGS} -t \"{topic}\" -m \"{{message}}\" ${SBFSPOT_MQTT_ARGUMENTS[*]}
     elif [ "${SBFSPOT_MQTT_FORMAT}" = "text" ]; then
         setConfigValue MQTT_ItemFormat "{key}:{value}"
         setConfigValue MQTT_ItemDelimiter semicolon
-        setConfigValue MQTT_PublisherArgs "${SBFSPOT_MQTT_BIN_ARGS} -t \"{topic}\" -m \"{message}\" ${SBFSPOT_MQTT_ARGUMENTS}"
+        setConfigValue MQTT_PublisherArgs "${SBFSPOT_MQTT_BIN_ARGS} -t \"{topic}\" -m \"{message}\" ${SBFSPOT_MQTT_ARGUMENTS[*]}"
     elif [ "$SBFSPOT_MQTT_FORMAT" = "xml" ]; then
         setConfigValue MQTT_ItemFormat "<item name=\"{key}\" value=\"{value}\" />"
         setConfigValue MQTT_ItemDelimiter none
-        setConfigValue MQTT_PublisherArgs "${SBFSPOT_MQTT_BIN_ARGS} -t \"{topic}\" -m \"<mqtt_message>{message}</mqtt_message>\" ${SBFSPOT_MQTT_ARGUMENTS}"
+        setConfigValue MQTT_PublisherArgs "${SBFSPOT_MQTT_BIN_ARGS} -t \"{topic}\" -m \"<mqtt_message>{message}</mqtt_message>\" ${SBFSPOT_MQTT_ARGUMENTS[*]}"
     fi
-    setConfigValue MQTT_Data ${SBFSPOT_MQTT_DATA}
+    setConfigValue MQTT_Data ${SBFSPOT_MQTT_DATA[*]}
 fi
 
 [ "${SBFSPOT_CSV_EXPORT}" = "false" ] && SBFSPOT_BIN_ARGS="${SBFSPOT_BIN_ARGS} -nocsv"
