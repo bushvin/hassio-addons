@@ -67,11 +67,11 @@ RUN make nosql
 # runtinme container
 FROM $BUILD_FROM
 
-ARG user=sbfspot
-ARG group=sbfspot
-ARG uid=5000
-ARG gid=5000
-ENV SBFSPOT_INTERVAL 300
+# ARG user=sbfspot
+# ARG group=sbfspot
+# ARG uid=5000
+# ARG gid=5000
+# ENV SBFSPOT_INTERVAL 300
 
 ARG TEMPIO_VERSION BUILD_ARCH
 
@@ -105,7 +105,7 @@ RUN apk update && apk add --no-cache \
 #     mosquitto-clients=2.0.18-r0
 
 # Copy data for add-on
-WORKDIR /usr/bin/sbfspot
+WORKDIR /usr/local/bin
 
 COPY --from=builder-base /tmp/SBFspot/nosql/bin/SBFspot /usr/local/bin/SBFspot_nosql
 # COPY --from=builder-base /tmp/SBFspot/mariadb/bin/SBFspot /usr/bin/sbfspot/SBFspot
@@ -168,7 +168,7 @@ RUN mkdir /etc/sbfspot
 RUN chmod u+x /run.sh
 # RUN chown $user:$group /run.sh
 
-USER $user
+# USER $user
 
 ENTRYPOINT ["/start.sh"]
 #Launch nginx with debug options. not working yet
