@@ -43,7 +43,7 @@ WORKDIR /tmp
 RUN git clone https://github.com/sbfspot/SBFspot.git .
 
 WORKDIR /tmp/SBFspot
-RUN git checkout tags/v${SBFSPOT_VERSION} -b version-${SBFSPOT_VERSION}
+RUN git checkout tags/v3.9.11 -b version-3.9.11
 RUN sed -i s-\#ifdef\ linux-\#ifdef\ linux\\n\#include\ \<sys\/select.h\>- Ethernet.h
 RUN sed -i s-\#ifdef\ linux-\#ifdef\ linux\\n\#include\ \<sys\/select.h\>- bluetooth.h
 RUN sed -i s/mariadbclient/mariadb/ makefile
