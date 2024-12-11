@@ -123,8 +123,6 @@ COPY --from=builder-base /tmp/SBFspot/TagList* /usr/bin/sbfspot/
 # && cp /tmp/SBFspot/date_time_zonespec.csv /usr/bin/sbfspot \
 # && cp /tmp/SBFspot/TagList* /usr/bin/sbfspot
 
-COPY rootfs /
-
 RUN chmod a+x /etc/services.d/sbfspot/** /usr/bin/sbfspot/**
 
 # # --- install cron ---
