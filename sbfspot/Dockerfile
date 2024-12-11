@@ -12,7 +12,6 @@ RUN apk update && apk add --no-cache \
     git \
     g++ \
     make \
-    mariadb-dev \
     mosquitto-clients \
     tzdata
 
@@ -44,8 +43,6 @@ RUN apk update && apk add --no-cache \
     bluez \
     bluez-libs \
     libstdc++ \
-    mariadb-common \
-    mariadb-connector-c \
     ncurses-libs \
     libcurl \
     mosquitto-clients

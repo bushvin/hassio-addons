@@ -71,7 +71,15 @@ setConfigValue DateFormat "${SBFSPOT_DATEFORMAT}"
 setConfigValue TimeFormat "${SBFSPOT_TIMEFORMAT}"
 [ "${SBFSPOT_DECIMALPOINT}" = "," ] && setConfigValue DecimalPoint comma
 [ "${SBFSPOT_DECIMALPOINT}" = "." ] && setConfigValue DecimalPoint point
-setConfigValue SynchTime "${SBFSPOT_SYNCTIME}"
+if [ "${SBFSPOT_SYNCTIME}" = "disabled" ]; then
+    setConfigValue SynchTime 0
+elif [ "${SBFSPOT_SYNCTIME}" = "weekly" ]; then
+    setConfigValue SynchTime 7
+elif [ "${SBFSPOT_SYNCTIME}" = "monthly" ]; then
+    setConfigValue SynchTime 30
+else
+    setConfigValue SynchTime 1
+fi
 setConfigValue SynchTimeLow "${SBFSPOT_SYNCTIME_LOW}"
 setConfigValue SynchTimeHigh "${SBFSPOT_SYNCTIME_HIGH}"
 setConfigValue SunRSOffset "${SBFSPOT_SUNRSOFFSET}"
@@ -113,10 +121,15 @@ fi
 cat "${conffile}"
 
 while true; do
-    printf "Start: %s" $(date)
-    printf "Arguments: %s" ${SBFSPOT_BIN_ARGS}
+    echo "Start: $(date)"
+    echo "Arguments: ${SBFSPOT_BIN_ARGS}"
+
+    # printf "Start: %s" $(date)
+    # printf "Arguments: %s" ${SBFSPOT_BIN_ARGS}
     # timeout --foreground 180 /usr/local/bin/SBFspot_nosql ${SBFSPOT_BIN_ARGS}
-    printf "End: %s" $(date)
-    printf "Waiting for %d seconds..." ${SBFSPOT_INTERVAL}
+    echo "End: $(date)"
+    echo "Waiting for ${SBFSPOT_INTERVAL} seconds..."
+    # printf "End: %s" $(date)
+    # printf "Waiting for %d seconds..." ${SBFSPOT_INTERVAL}
     sleep ${SBFSPOT_INTERVAL}
 done
