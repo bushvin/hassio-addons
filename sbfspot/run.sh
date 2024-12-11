@@ -107,7 +107,7 @@ if [ "${SBFSPOT_MQTT_EXPORT}" = "true" ]; then
     elif [ "$SBFSPOT_MQTT_FORMAT" = "xml" ]; then
         setConfigValue MQTT_ItemFormat "<item name=\"{key}\" value=\"{value}\" />"
         setConfigValue MQTT_ItemDelimiter none
-        setConfigValue MQTT_PublisherArgs "${SBFSPOT_MQTT_BIN_ARGS} -t \"{topic}\" -m \"<mqtt_message>{message}</mqtt_message>\" ${SBFSPOT_MQTT_ARGUMENTS[*]}"
+        setConfigValue MQTT_PublisherArgs "${SBFSPOT_MQTT_BIN_ARGS} -t \"{topic}\" -m \"\<mqtt_message\>{message}\</mqtt_message\>\" ${SBFSPOT_MQTT_ARGUMENTS[*]}"
     fi
     setConfigValue MQTT_Data ${SBFSPOT_MQTT_DATA[*]}
 fi
