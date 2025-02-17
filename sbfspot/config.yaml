@@ -1,6 +1,6 @@
 ---
 name: SBFspot
-version: 0.0.9-5
+version: 2025.2.0
 slug: sbfspot
 description: >-
   Get your inverter's data as a device and entities in Home Assistant using MQTT
