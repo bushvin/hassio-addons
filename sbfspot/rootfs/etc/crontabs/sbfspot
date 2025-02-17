@@ -1,0 +1,8 @@
+# min   hour    day     month   weekday command
+@reboot                                 /usr/local/bin/sbfspot-cron.sh 0
+*       *       *       *       *       /usr/local/bin/sbfspot-cron.sh 1
+*/5     *       *       *       *       /usr/local/bin/sbfspot-cron.sh 5
+*/10    *       *       *       *       /usr/local/bin/sbfspot-cron.sh 10
+*/15    *       *       *       *       /usr/local/bin/sbfspot-cron.sh 15
+*/30    *       *       *       *       /usr/local/bin/sbfspot-cron.sh 30
+0       *       *       *       *       /usr/local/bin/sbfspot-cron.sh 60

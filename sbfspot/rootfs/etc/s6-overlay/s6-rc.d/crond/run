@@ -1,0 +1,30 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Bushvin Add-on: sbfspot
+# Starts crond
+# ==============================================================================
+
+readonly CONFIG_PATH=/data/options.json
+declare SENSOR_ACTION
+SENSOR_ACTION=$(bashio::config 'sensor_action' 'run')
+
+bashio::log.level $(bashio::config 'log_level' 'info')
+
+. /usr/local/bin/lib-mqtt.sh
+. /usr/local/bin/lib-sbfspot.sh
+
+case ${SENSOR_ACTION} in
+    "run")
+        bashio::log.info "Marking device as online"
+        SBFspot::inverter.get_info
+        MQTT::device.set_availability online
+        bashio::log.info "Starting crond"
+        exec /usr/sbin/crond -f
+        ;;
+    "delete")
+        bashio::log.info "Sensors deleted. Halting Add-On"
+        echo 0 > /run/s6-linux-init-container-results/exitcode
+        exec /run/s6/basedir/bin/halt
+        ;;
+esac

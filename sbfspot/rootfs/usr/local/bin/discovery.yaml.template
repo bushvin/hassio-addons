@@ -1,0 +1,264 @@
+---
+device:
+    identifiers:
+    - "${INVERTER_SERIAL}"
+    name: "${PLANT_NAME}"
+    serial_number: "${INVERTER_SERIAL}"
+    model: "${INVERTER_DEVICE_TYPE}"
+origin:
+    name: SBFspot
+    sw_version: "3.9.11"
+    support_url: https://github.com/bushvin/hassio-addons
+state_topic: homeassistant/device/${INVERTER_SERIAL}/config
+qos: 2
+components:
+    cmp_inverter_last_update:
+        platform: sensor
+        name: Last updated
+        device_class: timestamp
+        value_template: >-
+            {{ value_json.Timestamp | as_timestamp | timestamp_custom }}${PLANT_TZ_OFFSET}
+        unique_id: ${INVERTER_SERIAL}_timestamp,
+        state_topic: homeassistant/device/${INVERTER_SERIAL}
+        availability:
+            topic: homeassistant/device/${INVERTER_SERIAL}/avalability
+            value_template: >-
+                {{ value_json.state }}
+    cmp_inverter_state:
+        platform: sensor
+        name: Inverter State
+        value_template: >-
+            {{ value_json.InvStatus }}
+        unique_id: ${INVERTER_SERIAL}_state
+        icon: mdi:select-inverse
+        state_topic: homeassistant/device/${INVERTER_SERIAL}
+        json_attributes_template: >
+            {{ {'sunrise': '%s%s' % (value_json.SunRise | as_timestamp | timestamp_custom, '${PLANT_TZ_OFFSET}'),
+                'sunset': '%s%s' % (value_json.SunSet | as_timestamp | timestamp_custom, '${PLANT_TZ_OFFSET}'),
+                'serial': value_json.InvSerial,
+                'name': value_json.InvName,
+                'temperature': value_json.InvTemperature,
+                'sw_version': value_json.InvSwVer,
+                'wake_up_time': '%s%s' % (value_json.InvWakeupTm | as_timestamp | timestamp_custom, '${PLANT_TZ_OFFSET}'),
+                'sleep_time': '%s%s' % (value_json.InvSleepTm | as_timestamp | timestamp_custom, '${PLANT_TZ_OFFSET}')
+                 } | tojson }}
+        json_attributes_topic: homeassistant/device/${INVERTER_SERIAL}
+        availability:
+            topic: homeassistant/device/${INVERTER_SERIAL}/avalability
+            value_template: >-
+                {{ value_json.state }}
+    cmp_inverter_yield:
+        platform: sensor
+        name: Inverter Yield
+        device_class: energy
+        state_class: total_increasing
+        unit_of_measurement: kWh
+        value_template: >-
+            {{ value_json.ETotal | float(0) }}
+        unique_id: ${INVERTER_SERIAL}_yield
+        icon: mdi:solar-power
+        state_topic: homeassistant/device/${INVERTER_SERIAL}
+        json_attributes_template: >-
+            {{ { 'today': value_json.EToday | float(0) } | tojson }}
+        json_attributes_topic: homeassistant/device/${INVERTER_SERIAL}
+        availability:
+            topic: homeassistant/device/${INVERTER_SERIAL}/avalability
+            value_template: >-
+                {{ value_json.state }}
+    cmp_inverter_udc:
+        platform: sensor
+        name: DC voltage input
+        device_class: voltage
+        state_class: measurement
+        unit_of_measurement: V
+        value_template: >-
+            {% set UDC = namespace(count=0) -%}
+            {% for k in value_json.keys(): -%}
+            {%     if k.startswith("UDC"): -%}
+            {%         set UDC.count = UDC.count + value_json[k] | float(0) -%}
+            {%     endif -%}
+            {% endfor -%}
+            {{ UDC.count }}
+        unique_id: ${INVERTER_SERIAL}_udc
+        icon: mdi:solar-panel-large
+        state_topic: homeassistant/device/${INVERTER_SERIAL}
+        json_attributes_template: >-
+            {% set data = namespace(items=[]) -%}
+            {% set pfx = "UDC" -%}
+            {% for k in value_json.keys(): -%}
+            {%     if k.startswith(pfx): -%}
+            {%         set data.items = data.items + [(k|lower, value_json[k]|float(0))] -%}
+            {%     endif -%}
+            {% endfor -%}
+            {{ dict.from_keys(data.items) | tojson }}
+        json_attributes_topic: homeassistant/device/${INVERTER_SERIAL}
+        availability:
+            topic: homeassistant/device/${INVERTER_SERIAL}/avalability
+            value_template: >-
+                {{ value_json.state }}
+    cmp_inverter_idc:
+        platform: sensor
+        name: DC current input
+        device_class: current
+        state_class: measurement
+        unit_of_measurement: A
+        value_template: >-
+            {% set IDC = namespace(count=0) -%}
+            {% for k in value_json.keys(): -%}
+            {%     if k.startswith("IDC"): -%}
+            {%         set IDC.count = IDC.count + value_json[k] | float(0) -%}
+            {%     endif -%}
+            {% endfor -%}
+            {{ IDC.count }}
+        unique_id: ${INVERTER_SERIAL}_idc
+        icon: mdi:solar-panel-large
+        state_topic: homeassistant/device/${INVERTER_SERIAL}
+        json_attributes_template: >-
+            {% set data = namespace(items=[]) -%}
+            {% set pfx = "IDC" -%}
+            {% for k in value_json.keys(): -%}
+            {%     if k.startswith(pfx): -%}
+            {%         set data.items = data.items + [(k|lower, value_json[k]|float(0))] -%}
+            {%     endif -%}
+            {% endfor -%}
+            {{ dict.from_keys(data.items) | tojson }}
+        json_attributes_topic: homeassistant/device/${INVERTER_SERIAL}
+        availability:
+            topic: homeassistant/device/${INVERTER_SERIAL}/avalability
+            value_template: >-
+                {{ value_json.state }}
+    cmp_inverter_pdc:
+        platform: sensor
+        name: DC power input
+        device_class: power
+        state_class: measurement
+        unit_of_measurement: W
+        value_template: >-
+            {% set PDC = namespace(count=0) -%}
+            {% for k in value_json.keys(): -%}
+            {%     if k.startswith("PDC") and k != "PDCTot": -%}
+            {%         set PDC.count = PDC.count + value_json[k] | float(0) -%}
+            {%     endif -%}
+            {% endfor -%}
+            {{ PDC.count }}
+        unique_id: ${INVERTER_SERIAL}_pdc
+        icon: mdi:solar-power-variant-outline
+        state_topic: homeassistant/device/${INVERTER_SERIAL}
+        json_attributes_template: >-
+            {% set data = namespace(items=[]) -%}
+            {% set pfx = "PDC" -%}
+            {% for k in value_json.keys(): -%}
+            {%     if k.startswith(pfx) and k != "PDCTot": -%}
+            {%         set data.items = data.items + [(k|lower, value_json[k]|float(0))] -%}
+            {%     endif -%}
+            {% endfor -%}
+            {{ dict.from_keys(data.items) | tojson }}
+        json_attributes_topic: homeassistant/device/${INVERTER_SERIAL}
+        availability:
+            topic: homeassistant/device/${INVERTER_SERIAL}/avalability
+            value_template: >-
+                {{ value_json.state }}
+    cmp_inverter_pac:
+        platform: sensor
+        name: Power
+        device_class: power
+        state_class: measurement
+        unit_of_measurement: W
+        value_template: >-
+            {{ value_json.PACTot | float(0) }}
+        unique_id: ${INVERTER_SERIAL}_pac
+        icon: mdi:solar-power-variant-outline
+        state_topic: homeassistant/device/${INVERTER_SERIAL}
+        json_attributes_template: >-
+            {% set data = namespace(items=[]) -%}
+            {% set pfx = "PAC" -%}
+            {% for k in value_json.keys(): -%}
+            {%     if k.startswith(pfx) and k!= 'PACTot': -%}
+            {%         set data.items = data.items + [(k|lower, value_json[k]|float(0))] -%}
+            {%     endif -%}
+            {% endfor -%}
+            {{ dict.from_keys(data.items) | tojson }}
+        json_attributes_topic: homeassistant/device/${INVERTER_SERIAL}
+        availability:
+            topic: homeassistant/device/${INVERTER_SERIAL}/avalability
+            value_template: >-
+                {{ value_json.state }}
+    cmp_inverter_uac:
+        platform: sensor
+        name: Grid Voltage
+        device_class: voltage
+        state_class: measurement
+        unit_of_measurement: V
+        value_template: >-
+            {% set UAC = namespace(count=0) -%}
+            {% for k in value_json.keys(): -%}
+            {%     if k.startswith("UAC"): -%}
+            {%         set UAC.count = UAC.count + value_json[k] | float(0) -%}
+            {%     endif -%}
+            {% endfor -%}
+            {{ UAC.count }}
+        unique_id: ${INVERTER_SERIAL}_uac
+        icon: mdi:solar-power-variant-outline
+        state_topic: homeassistant/device/${INVERTER_SERIAL}
+        json_attributes_template: >-
+            {% set data = namespace(items=[]) -%}
+            {% set pfx = "UAC" -%}
+            {% for k in value_json.keys(): -%}
+            {%     if k.startswith(pfx): -%}
+            {%         set data.items = data.items + [(k|lower, value_json[k]|float(0))] -%}
+            {%     endif -%}
+            {% endfor -%}
+            {{ dict.from_keys(data.items) | tojson }}
+        json_attributes_topic: homeassistant/device/${INVERTER_SERIAL}
+        availability:
+            topic: homeassistant/device/${INVERTER_SERIAL}/avalability
+            value_template: >-
+                {{ value_json.state }}
+    cmp_inverter_iac:
+        platform: sensor
+        name: Grid Current
+        device_class: current
+        state_class: measurement
+        unit_of_measurement: A
+        value_template: >-
+            {% set IAC = namespace(count=0) -%}
+            {% for k in value_json.keys(): -%}
+            {%     if k.startswith("IAC"): -%}
+            {%         set IAC.count = IAC.count + value_json[k] | float(0) -%}
+            {%     endif -%}
+            {% endfor -%}
+            {{ IAC.count }}
+        unique_id: ${INVERTER_SERIAL}_iac
+        icon: mdi:solar-power-variant-outline
+        state_topic: homeassistant/device/${INVERTER_SERIAL}
+        json_attributes_template: >-
+            {% set data = namespace(items=[]) -%}
+            {% set pfx = "IAC" -%}
+            {% for k in value_json.keys(): -%}
+            {%     if k.startswith(pfx): -%}
+            {%         set data.items = data.items + [(k|lower, value_json[k]|float(0))] -%}
+            {%     endif -%}
+            {% endfor -%}
+            {{ dict.from_keys(data.items) | tojson }}
+        json_attributes_topic: homeassistant/device/${INVERTER_SERIAL}
+        availability:
+            topic: homeassistant/device/${INVERTER_SERIAL}/avalability
+            value_template: >-
+                {{ value_json.state }}
+    cmp_inverter_btsignal:
+        platform: sensor
+        name: Bluetooth Signal
+        state_class: measurement
+        unit_of_measurement: '%'
+        value_template: >-
+            {{ value_json.BTSignal }}
+        unique_id: ${INVERTER_SERIAL}_btsignal
+        icon: mdi:bluetooth-audio
+        state_topic: homeassistant/device/${INVERTER_SERIAL}
+        json_attributes_template: >-
+            {{ { 'address': '${SBFSPOT_INVERTER_BTADDRESS}' } | tojson }}
+        json_attributes_topic: homeassistant/device/${INVERTER_SERIAL}
+        availability:
+            topic: homeassistant/device/${INVERTER_SERIAL}/avalability
+            value_template: >-
+                {{ value_json.state }}

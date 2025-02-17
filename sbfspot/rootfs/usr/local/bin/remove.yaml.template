@@ -1,0 +1,32 @@
+---
+device:
+    identifiers:
+    - "${INVERTER_SERIAL}"
+    name: "${PLANT_NAME}"
+origin:
+    name: SBFspot
+    sw_version: "3.9.11"
+    support_url: https://github.com/bushvin/hassio-addons
+state_topic: homeassistant/device/${INVERTER_SERIAL}/config
+qos: 2
+components:
+    cmp_inverter_last_update:
+        platform: sensor
+    cmp_inverter_state:
+        platform: sensor
+    cmp_inverter_yield:
+        platform: sensor
+    cmp_inverter_udc:
+        platform: sensor
+    cmp_inverter_idc:
+        platform: sensor
+    cmp_inverter_pdc:
+        platform: sensor
+    cmp_inverter_pac:
+        platform: sensor
+    cmp_inverter_uac:
+        platform: sensor
+    cmp_inverter_iac:
+        platform: sensor
+    cmp_inverter_btsignal:
+        platform: sensor

@@ -1,0 +1,9 @@
+---
+#  https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
+
+args:
+  SBFSPOT_VERSION: "3.9.11"
+  SBFSPOT_USER: "sbfspot"
+  SBFSPOT_GROUP: "sbfspot"
+  SBFSPOT_UID: "5000"
+  SBFSPOT_GID: "5000"

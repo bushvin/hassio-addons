@@ -1,0 +1,63 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Bushvin Add-on: sbfspot
+# inits sbfspot
+# ==============================================================================
+
+readonly CONFIG_PATH=/data/options.json
+
+declare SENSOR_ACTION
+declare PLANT_NAME
+declare PLANT_TZ
+declare PLANT_TZ_OFFSET
+declare INVERTER_PASSWORD
+
+SENSOR_ACTION=$(bashio::config 'sensor_action' 'run')
+PLANT_NAME=$(bashio::config 'plant_name' '')
+PLANT_TZ=$(bashio::config 'plant_timezone' '')
+INVERTER_PASSWORD=$(bashio::config 'inverter_password' '0000')
+PLANT_TZ_OFFSET=$(TZ=${PLANT_TZ} date +%z)
+
+export PLANT_NAME PLANT_TZ_OFFSET
+
+bashio::log.level $(bashio::config 'log_level' 'info')
+
+. /usr/local/bin/lib-mqtt.sh
+. /usr/local/bin/lib-sbfspot.sh
+
+case ${SENSOR_ACTION} in
+    "run")
+        bashio::log.info "Initializing SBFspot"
+        DISCOVERY_PATH=$(mktemp -d)
+        SBFspot::config.set_filename ${DISCOVERY_PATH}/discovery.cfg
+        SBFspot::config.set_value BTAddress $(bashio::config 'inverter_address' '00:00:00:00:00:00')
+        if test "$(bashio::config 'local_address' '00:00:00:00:00:00')" != "00:00:00:00:00:00"; then
+            SBFspot::config.set_value LocalBTAddress $(bashio::config 'local_address' '00:00:00:00:00:00')
+        fi
+        SBFspot::config.set_value Plantname ${PLANT_NAME}
+        SBFspot::config.set_value Password ${INVERTER_PASSWORD}
+        SBFspot::config.set_value Timezone ${PLANT_TZ}
+        SBFspot::config.set_value Latitude  $(bashio::config 'plant_latitude' 50.80)
+        SBFspot::config.set_value Longitude  $(bashio::config 'plant_longitude' 4.33)
+        SBFspot::config.set_value CalculateMissingSpotValues 1
+        SBFspot::config.set_value SynchTime 1
+        SBFspot::config.set_value SynchTimeLow 60
+        SBFspot::config.set_value SynchTimeHigh 3600
+        SBFspot::config.set_value Locale en-US
+        SBFspot::config.set_value OutputPath ${DISCOVERY_PATH}
+        SBFspot::config.set_value CSV_Export 1
+        SBFspot::config.set_value CSV_ExtendedHeader 0
+        SBFspot::config.set_value CSV_Header 1
+
+        bashio::log.info "Generating SBFspot discovery information"
+        SBFspot::inverter.get_info ${DISCOVERY_PATH}/discovery.cfg ${DISCOVERY_PATH}
+        MQTT::device.create ${DISCOVERY_PATH}
+        ;;
+    "delete")
+        bashio::log.warning "Cleaning up sensors"
+        REMOVAL_PATH=$(mktemp -d)
+        SBFspot::inverter.get_info
+        MQTT::device.delete ${REMOVAL_PATH}
+        ;;
+esac

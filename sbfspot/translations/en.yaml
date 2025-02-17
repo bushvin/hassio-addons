@@ -1,0 +1,62 @@
+---
+configuration:
+  update_interval:
+    name: SBFspot inverter query interval
+    description: >-
+      The interval in minutes between queries to the inverter
+  connection_type:
+    name: SBFspot connection type
+    description: >-
+      The way SBFspot connects to the inverter (currently, only bluetooth is supported)
+  inverter_address:
+    name: Inverter address
+    description: >-
+      The address (bluetooth MAC or IP address) SBFspot will connect to
+  inverter_password:
+    name: Inverter password
+    description: >-
+      The user inverter password
+  local_address:
+    name: Local bluetooth address
+    description: >-
+      Specify the bluettoth addres for the bluetooth adapter to use.
+  plant_name:
+    name: Plant Name
+    description: >-
+      The name of your energy plant
+  plant_latitude:
+    name: Latitude
+    description: >-
+      The latitude coordinates of your plant
+  plant_longitude:
+    name: Longitude
+    description: >-
+      The longitude coordinates of your plant
+  plant_timezone:
+    name: Timezone
+    description: >-
+      The timezone your plant is located in
+  mqtt_hostname:
+    name: MQTT hostname or IP address
+    description: >-
+      The fqdn or ip address of your MQTT server
+  mqtt_port:
+    name: MQTT port
+    description: >-
+      The port of the MQTT service
+  mqtt_username:
+    name: MQTT Username
+    description: >-
+      The username to use to connect to your MQTT server
+  mqtt_password:
+    name: MQTT Password
+    description: >-
+      The password of the user to use to connect to your MQTT server
+  sensor_action:
+    name: The mode the add-on will run in
+    description: >-
+      'run' will make sure the required device is available in Home Assistant while 'delete' will remove the device from Home Assistant
+  log_level:
+    name: Logging level
+    description: >-
+      How much logs do you want to go through?
